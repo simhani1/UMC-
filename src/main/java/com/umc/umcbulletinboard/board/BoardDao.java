@@ -55,4 +55,31 @@ public class BoardDao {
                         rs.getString("time")
                 ));
     }
+
+    /**
+     * 특정 게시판 글 조회
+     * GET
+     */
+    public List<GetAllPostRes> getAllPostResByType(int boardTypeId) {
+        String getAllPostResByTypeQuery = "select BT.type         as boardType,\n" +
+                "       U.nickname      as nickname,\n" +
+                "       title,\n" +
+                "       contents,\n" +
+                "       Board.createdAt as time\n" +
+                "from Board\n" +
+                "         left join BoardType BT on Board.boardTypeId = BT.boardTypeId\n" +
+                "         left join User U on Board.userId = U.userId\n" +
+                "where Board.boardTypeId = ?\n" +
+                "order by time;";
+        int getAllPostResByTypeParams = boardTypeId;
+        return this.jdbcTemplate.query(getAllPostResByTypeQuery,
+                (rs, rowNum) -> new GetAllPostRes(
+                        rs.getString("boardType"),
+                        rs.getString("nickname"),
+                        rs.getString("title"),
+                        rs.getString("contents"),
+                        rs.getString("time")
+                ),
+                getAllPostResByTypeParams);
+    }
 }

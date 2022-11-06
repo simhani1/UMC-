@@ -42,4 +42,15 @@ public class BoardController {
         List<GetAllPostRes> getAllPostRes = boardProvider.getAllPost();
         return getAllPostRes;
     }
+
+    /**
+     * 특정 게시판 글 조회
+     * GET
+     */
+    @ResponseBody
+    @GetMapping("/{boardTypeId}")
+    public List<GetAllPostRes> getAllPostResByType(@PathVariable("boardTypeId") int boardTypeId) {
+        List<GetAllPostRes> getAllPostRes = boardProvider.getAllPostResByType(boardTypeId);
+        return getAllPostRes;
+    }
 }

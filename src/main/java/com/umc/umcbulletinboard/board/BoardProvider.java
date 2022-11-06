@@ -23,4 +23,13 @@ public class BoardProvider {
         List<GetAllPostRes> getAllPostRes = boardDao.getAllPost();
         return getAllPostRes;
     }
+
+    /**
+     * 특정 게시판 글 조회
+     * GET
+     */
+    public List<GetAllPostRes> getAllPostResByType(int boardTypeId) {
+        List<GetAllPostRes> getAllPostResByType = boardDao.getAllPostResByType(boardTypeId);
+        return getAllPostResByType;
+    }
 }
