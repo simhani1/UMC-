@@ -41,4 +41,13 @@ public class BoardProvider {
         List<GetAllPostRes> getAllPostByKeyword = boardDao.getAllPostResByKeyword(keyword);
         return getAllPostByKeyword;
     }
+
+    /*
+     * 작성자로 글 검색
+     * GET
+     * */
+    public List<GetAllPostRes> getAllPostResByNickname(String nickname) {
+        List<GetAllPostRes> getAllPostResByNickname = boardDao.getAllPostResByNickname(nickname);
+        return  getAllPostResByNickname;
+    }
 }

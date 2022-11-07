@@ -55,7 +55,7 @@ public class BoardController {
     }
 
     /*
-     * 제목/작성자로 글 검색
+     * 제목으로 글 검색
      * GET
      * */
     @ResponseBody
@@ -63,5 +63,16 @@ public class BoardController {
     public List<GetAllPostRes> getAllPostResByKeyword(@RequestParam(required = true) String keyword) {
         List<GetAllPostRes> getAllPostResByKeyword = boardProvider.getAllPostResByKeyword(keyword);
         return getAllPostResByKeyword;
+    }
+
+    /*
+     * 작성자로 글 검색
+     * GET
+     * */
+    @ResponseBody
+    @GetMapping("/writer")
+    public List<GetAllPostRes> getAllPostResByWriter(@RequestParam(required = true) String nickname) {
+        List<GetAllPostRes> getAllPostResByNickname = boardProvider.getAllPostResByNickname(nickname);
+        return getAllPostResByNickname;
     }
 }

@@ -109,4 +109,31 @@ public class BoardDao {
                 ),
                 getAllPostByKeywordParams);
     }
+
+    /*
+     * 작성자로 글 검색
+     * GET
+     * */
+    public List<GetAllPostRes> getAllPostResByNickname(String nickname) {
+        String getAllPostByNicknameQuery = "select BT.type         as boardType,\n" +
+                "       U.nickname      as nickname,\n" +
+                "       title,\n" +
+                "       contents,\n" +
+                "       Board.createdAt as time\n" +
+                "from Board\n" +
+                "         left join BoardType BT on Board.boardTypeId = BT.boardTypeId\n" +
+                "         left join User U on Board.userId = U.userId\n" +
+                "where nickname regexp ?\n" +
+                "order by time;";
+        String getAllPostByNicknameParams = nickname;
+        return this.jdbcTemplate.query(getAllPostByNicknameQuery,
+                (rs, rowNum) -> new GetAllPostRes(
+                        rs.getString("boardType"),
+                        rs.getString("nickname"),
+                        rs.getString("title"),
+                        rs.getString("contents"),
+                        rs.getString("time")
+                ),
+                getAllPostByNicknameParams);
+    }
 }
