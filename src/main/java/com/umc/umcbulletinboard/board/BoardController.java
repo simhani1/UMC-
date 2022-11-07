@@ -53,4 +53,15 @@ public class BoardController {
         List<GetAllPostRes> getAllPostRes = boardProvider.getAllPostResByType(boardTypeId);
         return getAllPostRes;
     }
+
+    /*
+     * 제목/작성자로 글 검색
+     * GET
+     * */
+    @ResponseBody
+    @GetMapping("/title")
+    public List<GetAllPostRes> getAllPostResByKeyword(@RequestParam(required = true) String keyword) {
+        List<GetAllPostRes> getAllPostResByKeyword = boardProvider.getAllPostResByKeyword(keyword);
+        return getAllPostResByKeyword;
+    }
 }
